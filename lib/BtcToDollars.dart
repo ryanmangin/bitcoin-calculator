@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class BtcToDollars extends StatefulWidget {
   BtcToDollars({Key key}) : super(key: key);
@@ -10,6 +11,8 @@ class BtcToDollars extends StatefulWidget {
 class _BtcToDollarsState extends State<BtcToDollars> {
   final txtBTCtoUSD = TextEditingController();
   final txtConversion = TextEditingController();
+  final formatCurrency = new NumberFormat.simpleCurrency();
+
   double value;
   void calculateDollarsToBTC() {
     setState(() {
@@ -27,21 +30,43 @@ class _BtcToDollarsState extends State<BtcToDollars> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             value == null
-                ? Container()
-                : Text(
-                    '$value USD',
-                  ),
-            TextField(
-              controller: txtBTCtoUSD,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: "Amount",
-                hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0),
-              ),
-              style: TextStyle(color: Colors.black, fontSize: 12.0),
-              textInputAction: TextInputAction.done,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-            ),
+                ? Column(
+                    children: <Widget>[
+                      TextField(
+                        controller: txtBTCtoUSD,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Amount",
+                          hintStyle:
+                              TextStyle(color: Colors.grey, fontSize: 12.0),
+                        ),
+                        style: TextStyle(color: Colors.black, fontSize: 12.0),
+                        textInputAction: TextInputAction.done,
+                        keyboardType:
+                            TextInputType.numberWithOptions(decimal: true),
+                      ),
+                      Text('Enter Valid Input',
+                          style: TextStyle(color: Colors.red))
+                    ],
+                  )
+                : Column(children: <Widget>[
+                    Text(
+                      '${formatCurrency.format(value)} USD',
+                    ),
+                    TextField(
+                      controller: txtBTCtoUSD,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Amount",
+                        hintStyle:
+                            TextStyle(color: Colors.grey, fontSize: 12.0),
+                      ),
+                      style: TextStyle(color: Colors.black, fontSize: 12.0),
+                      textInputAction: TextInputAction.done,
+                      keyboardType:
+                          TextInputType.numberWithOptions(decimal: true),
+                    ),
+                  ]),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: RaisedButton(

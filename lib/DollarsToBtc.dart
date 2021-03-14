@@ -28,21 +28,45 @@ class _DollarsToBtcState extends State<DollarsToBtc> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             value == null
-                ? Container()
-                : Text(
-                    '$value BTC',
+                ? Column(children: <Widget>[
+                    TextFormField(
+                        controller: txtUSDtoBTC,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Amount",
+                          hintStyle:
+                              TextStyle(color: Colors.grey, fontSize: 12.0),
+                        ),
+                        inputFormatters: [
+                          WhitelistingTextInputFormatter(
+                              RegExp(r'^(\d+)?\.?\d{0,2}')),
+                        ],
+                        keyboardType:
+                            TextInputType.numberWithOptions(decimal: true)),
+                    Text('Enter Valid Input',
+                        style: TextStyle(color: Colors.red))
+                  ])
+                : Column(
+                    children: [
+                      Text(
+                        '${value.toStringAsFixed(7)} BTC',
+                      ),
+                      TextFormField(
+                          controller: txtUSDtoBTC,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Amount",
+                            hintStyle:
+                                TextStyle(color: Colors.grey, fontSize: 12.0),
+                          ),
+                          inputFormatters: [
+                            WhitelistingTextInputFormatter(
+                                RegExp(r'^(\d+)?\.?\d{0,2}')),
+                          ],
+                          keyboardType:
+                              TextInputType.numberWithOptions(decimal: true)),
+                    ],
                   ),
-            TextField(
-              controller: txtUSDtoBTC,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: "Amount",
-                hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0),
-              ),
-              style: TextStyle(color: Colors.black, fontSize: 12.0),
-              textInputAction: TextInputAction.done,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-            ),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: RaisedButton(
