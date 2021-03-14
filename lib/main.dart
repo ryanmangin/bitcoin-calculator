@@ -1,4 +1,3 @@
-import 'package:bitcoin_calculator/BtcToDollars.dart';
 import 'package:flutter/material.dart';
 import 'BtcToDollars.dart';
 import 'DollarsToBtc.dart';
@@ -10,6 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Counter App',
+      theme: new ThemeData(scaffoldBackgroundColor: const Color(0x88888888)),
       home: MyHomePage(title: 'Bitcoin Calculator App'),
     );
   }
@@ -38,6 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: RaisedButton(
+                key: Key('BTC-to-USD-button'),
                 child: Row(
                   children: <Widget>[
                     Text(
@@ -54,6 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: RaisedButton(
+                key: Key('USD-to-BTC-button'),
                 child: Row(
                   children: <Widget>[
                     Text(

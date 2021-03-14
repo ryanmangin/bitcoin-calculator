@@ -14,9 +14,9 @@ class _BtcToDollarsState extends State<BtcToDollars> {
   final formatCurrency = new NumberFormat.simpleCurrency();
 
   double value;
-  void calculateDollarsToBTC() {
+  void calculateDollarsToBTC(txt) {
     setState(() {
-      double _value = double.parse(txtBTCtoUSD.text) * 56762.80;
+      double _value = double.parse(txt) * 56762.80;
       value = _value;
     });
   }
@@ -33,14 +33,15 @@ class _BtcToDollarsState extends State<BtcToDollars> {
                 ? Column(
                     children: <Widget>[
                       TextField(
+                        style: TextStyle(color: Colors.white),
                         controller: txtBTCtoUSD,
+                        textAlign: TextAlign.center,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: "Amount",
                           hintStyle:
-                              TextStyle(color: Colors.grey, fontSize: 12.0),
+                              TextStyle(color: Colors.white, fontSize: 18.0),
                         ),
-                        style: TextStyle(color: Colors.black, fontSize: 12.0),
                         textInputAction: TextInputAction.done,
                         keyboardType:
                             TextInputType.numberWithOptions(decimal: true),
@@ -50,18 +51,18 @@ class _BtcToDollarsState extends State<BtcToDollars> {
                     ],
                   )
                 : Column(children: <Widget>[
-                    Text(
-                      '${formatCurrency.format(value)} USD',
-                    ),
+                    Text('${formatCurrency.format(value)} USD',
+                        style: TextStyle(color: Colors.white, fontSize: 24)),
                     TextField(
+                      style: TextStyle(color: Colors.white),
                       controller: txtBTCtoUSD,
+                      textAlign: TextAlign.center,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "Amount",
                         hintStyle:
-                            TextStyle(color: Colors.grey, fontSize: 12.0),
+                            TextStyle(color: Colors.white, fontSize: 18.0),
                       ),
-                      style: TextStyle(color: Colors.black, fontSize: 12.0),
                       textInputAction: TextInputAction.done,
                       keyboardType:
                           TextInputType.numberWithOptions(decimal: true),
@@ -70,6 +71,7 @@ class _BtcToDollarsState extends State<BtcToDollars> {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: RaisedButton(
+                key: Key('Calculate-BTC-to-USD-button'),
                 child: Row(
                   children: <Widget>[
                     Text(
@@ -78,7 +80,7 @@ class _BtcToDollarsState extends State<BtcToDollars> {
                   ],
                 ),
                 onPressed: () {
-                  calculateDollarsToBTC();
+                  calculateDollarsToBTC(txtBTCtoUSD.text);
                 },
               ),
             ),

@@ -30,12 +30,14 @@ class _DollarsToBtcState extends State<DollarsToBtc> {
             value == null
                 ? Column(children: <Widget>[
                     TextFormField(
+                        style: TextStyle(color: Colors.white),
                         controller: txtUSDtoBTC,
+                        textAlign: TextAlign.center,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: "Amount",
                           hintStyle:
-                              TextStyle(color: Colors.grey, fontSize: 12.0),
+                              TextStyle(color: Colors.white, fontSize: 18.0),
                         ),
                         inputFormatters: [
                           WhitelistingTextInputFormatter(
@@ -50,9 +52,12 @@ class _DollarsToBtcState extends State<DollarsToBtc> {
                     children: [
                       Text(
                         '${value.toStringAsFixed(7)} BTC',
+                        style: TextStyle(color: Colors.white, fontSize: 24),
                       ),
                       TextFormField(
+                          style: TextStyle(color: Colors.white),
                           controller: txtUSDtoBTC,
+                          textAlign: TextAlign.center,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "Amount",
@@ -70,6 +75,7 @@ class _DollarsToBtcState extends State<DollarsToBtc> {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: RaisedButton(
+                key: Key('Calculate-BTC-to-USD-button'),
                 child: Row(
                   children: <Widget>[
                     Text(
