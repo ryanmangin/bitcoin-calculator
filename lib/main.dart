@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'BtcToDollars.dart';
 import 'DollarsToBtc.dart';
+import 'api.dart';
+import 'globals.dart';
 
 void main() => runApp(MyApp());
 
@@ -26,6 +28,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Future<double> futurePrice;
+  double bitcoinPrice;
+  @override
+  void initState() {
+    super.initState();
+    BitcoinAPI.fetchPrice(httpClient).then((double result) {
+      setState(() {
+        bitcoinPrice = result;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,6 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Text('Current Bitcoin Price in USD: $bitcoinPrice',
+                key: Key('bitcoinPriceFinder')),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: RaisedButton(
