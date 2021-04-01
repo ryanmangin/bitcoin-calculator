@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'api.dart';
+import 'globals.dart';
 
 class BtcToDollars extends StatefulWidget {
   BtcToDollars({Key key}) : super(key: key);
@@ -9,6 +11,18 @@ class BtcToDollars extends StatefulWidget {
 }
 
 class _BtcToDollarsState extends State<BtcToDollars> {
+  Future<double> futurePrice;
+  double bitcoinPrice;
+  @override
+  void initState() {
+    super.initState();
+    BitcoinAPI.fetchPrice(httpClient).then((double result) {
+      setState(() {
+        bitcoinPrice = result;
+      });
+    });
+  }
+
   final txtBTCtoUSD = TextEditingController();
   final txtConversion = TextEditingController();
   final formatCurrency = new NumberFormat.simpleCurrency();
@@ -16,7 +30,7 @@ class _BtcToDollarsState extends State<BtcToDollars> {
   double value;
   void calculateDollarsToBTC(txt) {
     setState(() {
-      double _value = double.parse(txt) * 56762.80;
+      double _value = double.parse(txt) * bitcoinPrice;
       value = _value;
     });
   }
